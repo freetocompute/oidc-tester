@@ -15,6 +15,27 @@ https://docs.xebialabs.com/v.10.1/release/concept/release-oidc-with-keycloak/#se
 
 Some of the details of the UI are slightly off now but it was good enough.
 
+## Notes
+
+For this to work the OIDC client you are using needs to be configured to accept your redirect URL as valid. In 
+Keycloak that is in the Realm -> Clients -> (Your named client) -> Settings.
+
+The environment variables expected are:
+
+CLIENT_ID
+CLIENT_SECRET
+AUTH_PROVIDER_URL
+REDIRECT_URL
+REDIRECT_URL_PATH
+
+Examples:
+
+CLIENT_ID="your_named_oidc_client"
+CLIENT_SECRET="your_client_secret"
+AUTH_PROVIDER_URL="https://keycloak.mydomain.com/auth/realms/somerealmname"
+REDIRECT_URL="http://192.168.1.10:9999"
+REDIRECT_URL_PATH="/callback/login"
+
 ## cURL test
 
 Set these environment variables used below (or substitue).
@@ -39,7 +60,7 @@ curl -L -X POST "${PROVIDER_URL}/auth/realms/${REALM}/protocol/openid-connect/to
 
 ## Troubleshooting
 
-I had to include the "openid" scope to get the id_token included in the response.
+* I had to include the "openid" scope to get the id_token included in the response.
 
 # Acknowledgements
 

@@ -10,6 +10,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -51,6 +52,12 @@ func setCallbackCookie(w http.ResponseWriter, r *http.Request, name, value strin
 
 func main() {
 	ctx := context.Background()
+
+	fmt.Printf("CLIENT ID: %s\n", clientID)
+	fmt.Printf("CLIENT SECRET: %s\n", clientSecret)
+	fmt.Printf("AUTH PROVIDER URL: %s\n", authProviderURL)
+	fmt.Printf("REDIRECT URL: %s\n", redirectURL)
+	fmt.Printf("REDIRECT URL PATH: %s\n", redirectURLPath)
 
 	provider, err := oidc.NewProvider(ctx, authProviderURL)
 	if err != nil {
